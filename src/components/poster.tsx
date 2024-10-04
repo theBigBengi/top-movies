@@ -1,17 +1,20 @@
+import { useLayout } from "@/hooks/use-layout";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
 export const Poster = ({
   path,
-  isGridView,
   className,
 }: {
   path: string;
   className?: string;
-  isGridView?: boolean;
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+
+  const { layout } = useLayout();
+
+  const isGridView = layout === "grid";
 
   const handleImageLoad = () => {
     setIsLoaded(true);

@@ -1,17 +1,17 @@
-export interface SuccessResponse {
+export interface MoviesSuccessResponse {
   page: number;
   results: Movie[];
   total_pages: number;
   total_results: number;
 }
 
-export interface ErrorResponse {
+export interface MoviesErrorResponse {
   success: false;
   status_code: number;
   status_message: string;
 }
 
-export type MovieApiResponse = SuccessResponse | ErrorResponse;
+export type MoviesApiResponse = MoviesSuccessResponse | MoviesErrorResponse;
 
 export interface Movie {
   adult: boolean;
