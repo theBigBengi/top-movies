@@ -1,9 +1,9 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-
 import { QueryClient, QueryClientProvider } from "react-query";
 
-import { Movies } from "./features/movies/movies";
-import { MoviesTableOperations } from "./features/movies/movies-table-operations";
+import { AppLayout } from "./components/app-layout";
+import { MoviesPage } from "./pages/movies";
+import { PageNotFound } from "./pages/page-not-found";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient({
@@ -22,19 +22,12 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route index element={<Navigate replace to='movies' />} />
-            <Route
-              path='movies'
-              element={
-                <>
-                  <MoviesTableOperations />
-                  <Movies />
-                </>
-              }
-            />
+            <Route path='/' element={<AppLayout />}>
+              <Route index element={<Navigate replace to='movies' />} />
+              <Route path='movies' element={<MoviesPage />} />
 
-            {/* <Route path="login" element={<Login />} />
-            <Route path="*" element={<PageNotFound />} /> */}
+              <Route path='*' element={<PageNotFound />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

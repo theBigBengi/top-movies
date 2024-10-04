@@ -14,12 +14,12 @@ export function useMovies() {
 
   const {
     isLoading,
-    data: movies,
+    data: { total_results: count, results: movies } = {},
     error,
   } = useQuery({
     queryKey: ["movies", page, sortBy],
     queryFn: () => getMovies({ page, sortBy }),
   });
 
-  return { isLoading, error, movies };
+  return { isLoading, error, movies, count };
 }
