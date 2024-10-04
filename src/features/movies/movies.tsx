@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useMovies } from "./use-movies";
+import { Movie } from "@/lib/types";
 
 const Poster = ({
   path,
@@ -49,7 +50,7 @@ const Poster = ({
   );
 };
 
-const RowItem = ({ movie }: { movie: any }) => {
+const RowItem = ({ movie }: { movie: Movie }) => {
   return (
     <div className='flex items-center gap-4'>
       <Poster path={movie.poster_path} />
@@ -65,7 +66,7 @@ const GridItem = ({
   movie,
   isGridView,
 }: {
-  movie: any;
+  movie: Movie;
   isGridView: boolean;
 }) => {
   return (
@@ -84,8 +85,8 @@ export const Movies = () => {
   const [isGridView, setIsGridView] = useState(true);
 
   if (error) {
-    console.log(error.message);
-    return <div>Error</div>;
+    // console.log(error.message);
+    return <div>{}</div>;
   }
 
   return isLoading ? (

@@ -1,9 +1,12 @@
 import { getMovies } from "@/services/api-movies";
-import { useQuery, useQueryClient } from "react-query";
+import {
+  useQuery,
+  //  useQueryClient
+} from "react-query";
 import { useSearchParams } from "react-router-dom";
 
 export function useMovies() {
-  const queryClient = useQueryClient();
+  //   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
   const page = parseInt(searchParams.get("page") || "1");

@@ -1,37 +1,7 @@
+import { Movie, MovieApiResponse, SuccessResponse } from "@/lib/types";
+
 const BASE_URL = "https://api.themoviedb.org/3/discover/movie";
 const API_KEY = "4170bf35f7a61b8012d65de6ad644b9b";
-
-interface SuccessResponse {
-  page: number;
-  results: Movie[];
-  total_pages: number;
-  total_results: number;
-}
-
-interface ErrorResponse {
-  success: false;
-  status_code: number;
-  status_message: string;
-}
-
-type MovieApiResponse = SuccessResponse | ErrorResponse;
-
-interface Movie {
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  id: number;
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  release_date: string;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-}
 
 export const getMovies = async ({
   page,
