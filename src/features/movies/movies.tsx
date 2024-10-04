@@ -1,14 +1,21 @@
 import { LayoutGridIcon, LayoutListIcon } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useMovies } from "./use-movies";
 import { MovieItem } from "./movie-item";
-import { Pagination } from "@/components/pagination";
 import { useLayout } from "@/hooks/use-layout";
 
 export const Movies = () => {
-  const { movies, isLoading, error, count } = useMovies();
+  const {
+    movies,
+    isLoading,
+    error,
+    // count,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useMovies();
+
   const { layout, toggleLayout } = useLayout();
   const isGridView = layout === "grid";
 
@@ -19,6 +26,7 @@ export const Movies = () => {
         {error instanceof Error ? error.message : null}
       </div>
     );
+
   if (isLoading) return <div>Loading...</div>;
 
   const ViewButtonIcon = isGridView ? <LayoutListIcon /> : <LayoutGridIcon />;
@@ -48,7 +56,16 @@ export const Movies = () => {
         ))}
       </ul>
 
-      <Pagination count={count!} />
+      {/* Load More Button */}
+      {hasNextPage && (
+        <div className='flex justify-center mt-4'>
+          <Button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+            {isFetchingNextPage ? "Loading more..." : "Load More"}
+          </Button>
+        </div>
+      )}
+
+      {!hasNextPage && <p className='text-center mt-4'>No more movies</p>}
     </>
   );
 };
