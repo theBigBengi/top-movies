@@ -1,5 +1,5 @@
 import { Poster } from "@/components/poster";
-import { Separator } from "@/components/ui/separator";
+import { Card } from "@/components/ui/card";
 import { Movie } from "@/lib/types";
 import { format } from "date-fns";
 import { StarIcon } from "lucide-react";
@@ -9,24 +9,25 @@ const RowItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
 
   return (
     <>
-      <div className='flex gap-4  w-full'>
-        <Poster path={movie.poster_path} className='rounded' />
-        <div className='min-w-40 grow py-2  flex flex-col '>
-          <h2 className='font-bold '>
-            {rank}. {movie.title}
-          </h2>
-          <p className='text-sm'>{releaseDate}</p>
-          <p className='text-sm hidden md:block'>{movie.overview}</p>
-          <div className='flex items-center gap-1 mt-auto  '>
-            <StarIcon className='w-4 h-4 ' />
-            <span className=''> {movie.vote_average}</span>
-            <span className='text-muted-foreground text-sm'>
-              ({movie.vote_count})
-            </span>
+      <Card>
+        <div className='flex gap-4  w-full'>
+          <Poster path={movie.poster_path} className='rounded-l' />
+          <div className='min-w-40 grow py-2  flex flex-col '>
+            <h2 className='font-bold '>
+              {rank}. {movie.title}
+            </h2>
+            <p className='text-sm'>{releaseDate}</p>
+            <p className='text-sm hidden md:block'>{movie.overview}</p>
+            <div className='flex items-center gap-1 mt-auto  '>
+              <StarIcon className='w-4 h-4 ' />
+              <span className=''> {movie.vote_average}</span>
+              <span className='text-muted-foreground text-sm'>
+                ({movie.vote_count})
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <Separator className='my-2' />
+      </Card>
     </>
   );
 };
