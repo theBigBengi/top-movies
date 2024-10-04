@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import {
@@ -10,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
+import { LayoutToggleButton } from "./layout-toggle-button";
 
 const options = [
   { value: "popularity.desc", label: "Popularity" },
@@ -38,7 +38,9 @@ function SortBy() {
         </div>
         <DropdownMenuContent className='p-0'>
           <DropdownMenuLabel>Sort by</DropdownMenuLabel>
+
           <DropdownMenuSeparator className='my-0' />
+
           {options.map((opt) => (
             <DropdownMenuItem
               className='py-2.5 min-w-40 border-b last:border-b-0 rounded-none'
@@ -55,41 +57,10 @@ function SortBy() {
 }
 
 export const MoviesTableOperations: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  function handleChange(newValue: string) {
-    searchParams.set("page", newValue);
-    setSearchParams(searchParams);
-  }
-
   return (
-    <div>
+    <div className='flex items-center justify-between '>
       <SortBy />
-      <Button
-        variant='secondary'
-        onClick={() => {
-          handleChange(
-            searchParams.get("page")
-              ? (parseInt(searchParams.get("page") || "1") + 1).toString()
-              : "1"
-          );
-        }}
-      >
-        Next
-      </Button>
-      <Button
-        onClick={() => {
-          const searchParams = new URLSearchParams(window.location.search);
-
-          handleChange(
-            searchParams.get("page")
-              ? (parseInt(searchParams.get("page") || "1") - 1).toString()
-              : "1"
-          );
-        }}
-      >
-        Previous
-      </Button>
+      <LayoutToggleButton />
     </div>
   );
 };

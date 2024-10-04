@@ -33,7 +33,7 @@ const ScrollToTopButton: React.FC = () => {
         <Button
           variant='secondary'
           onClick={scrollToTop}
-          className='fixed active:scale-95 top-10 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-md rounded-2xl 
+          className='fixed active:scale-95 top-[82px] md:bottom-0 md:top-auto lg:right-10 md:left-auto left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-md rounded-2xl 
             transition-opacity duration-300 ease-in-out opacity-100'
         >
           Scroll to Top <MoveUpIcon className='w-4 h-4 ml-2' />

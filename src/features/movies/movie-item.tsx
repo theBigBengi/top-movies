@@ -13,10 +13,10 @@ const RowItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
 
   return (
     <>
-      <Card>
-        <div className='flex items-center gap-4  w-full'>
+      <Card className='min-w-60'>
+        <div className='flex items-center gap-4  w-full '>
           <Poster path={movie.poster_path} className='rounded-l' />
-          <div className='min-w-40 grow py-2  flex flex-col '>
+          <div className='grow py-2  flex flex-col '>
             <h2 className='font-bold '>
               {rank}. {movie.title}
             </h2>

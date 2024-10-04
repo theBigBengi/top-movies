@@ -37,7 +37,7 @@ export const Poster = ({
       className={`relative ${
         isGridView
           ? "max-w-full min-h-56  h-full"
-          : "w-20 min-h-32 md:min-w-40 md:min-h-52 "
+          : "w-24 min-h-32 md:min-w-40 md:min-h-52 "
       }`}
     >
       {!isLoaded && !hasError && (

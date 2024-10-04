@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { LayoutContext, LayoutContextProps } from "@/context";
+import { LayoutContext, LayoutContextProps } from "@/context/layout-provider";
 
 export const useLayout = (): LayoutContextProps => {
   const context = useContext(LayoutContext);
