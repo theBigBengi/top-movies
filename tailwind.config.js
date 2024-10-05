@@ -4,6 +4,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        xs: "350px",
+      },
       keyframes: {
         "slide-in-from-bottom": {
           "0%": { transform: "translateY(100%)", opacity: 0 },

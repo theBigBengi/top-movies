@@ -1,5 +1,5 @@
 import {
-  Movie,
+  DetailedMovie,
   MoviesApiResponse,
   MoviesErrorResponse,
   MoviesSuccessResponse,
@@ -30,17 +30,17 @@ export const getMovies = async ({
   return data as MoviesSuccessResponse;
 };
 
-export const getMovieById = async (id: number): Promise<Movie> => {
+export const getMovieById = async (id: number): Promise<DetailedMovie> => {
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=credits`
   );
 
-  const data: Movie | MoviesErrorResponse = await response.json();
+  const data: DetailedMovie | MoviesErrorResponse = await response.json();
 
   // Handle the error response, only ErrorResponse will have the 'success' property
   if ("success" in data && !data.success) {
     throw new Error(data.status_message);
   }
 
-  return data as Movie;
+  return data as DetailedMovie;
 };

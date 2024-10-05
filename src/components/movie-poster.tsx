@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { Skeleton } from "./ui/skeleton";
 
 /**
  * MoviePoster component displays a movie poster image.
@@ -53,13 +54,13 @@ export const MoviePoster = ({
     <div className={cn("relative", wrapperStyles)}>
       {/* Show a loading placeholder while the image is not yet loaded and no error has occurred */}
       {!isLoaded && !hasError && (
-        <div className='absolute inset-0 flex items-center justify-center bg-gray-200 animate-pulse' />
+        <Skeleton className='absolute inset-0 ah-full w-full' />
       )}
 
       {/* Show an error message if the image fails to load */}
       {hasError ? (
-        <div className='absolute inset-0 flex items-center justify-center bg-gray-200'>
-          <span className='text-red-500'>Image not available</span>
+        <div className='absolute inset-0 flex items-center justify-center'>
+          <span className='text-muted-foreground'>Image not available</span>
         </div>
       ) : (
         // Display the image with event handlers for load and error states
