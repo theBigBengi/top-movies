@@ -18,7 +18,7 @@ export const getMovies = async ({
   sortBy?: string;
 }): Promise<MoviesSuccessResponse> => {
   const response = await fetch(
-    `${BASE_URL}?api_key=${API_KEY}&language=en-US&page=${pageParam}&sort_by=${sortBy}`
+    `${BASE_URL}?api_key=${API_KEY}&language=en-US&page=${pageParam}&sort_by=${sortBy}&append_to_response=credits`
   );
 
   const data: MoviesApiResponse = await response.json();

@@ -34,17 +34,17 @@ export const AppLayout: React.FC = () => {
         >
           <img src='popcrown-logo.png' alt='popcrown' className='w-8 h-8' />
           <h1 className='font-bold'>POPCROWN</h1>
-          <ModeToggle className='ml-auto w-7 h-7 [&_svg]:w-4' />
+          <ModeToggle className='ml-auto w-8 h-8 [&_svg]:w-5' />
 
           <Link
             to='https://github.com/theBigBengi/top-movies'
             className={cn(
-              buttonVariants({ size: "icon", variant: "outline" }),
-              "h-7 w-7 p-0"
+              buttonVariants({ size: "icon", variant: "ghost" }),
+              "h-8 w-8 p-0 rounded-full bg-black text-white ml-1"
             )}
             target='_blank'
           >
-            <GithubIcon className='w-4' />
+            <GithubIcon className='w-5' />
           </Link>
         </header>
       </div>
