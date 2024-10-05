@@ -32,7 +32,7 @@ export const AppLayout: React.FC = () => {
         <header
           className={`w-full max-w-7xl mx-auto   text-lg tracking-tighter px-4 py-2 h-16  flex items-center gap-1`}
         >
-          <img src='popcrown-logo.png' alt='popcrown' className='w-8 h-8' />
+          <img src='/popcrown-logo.png' alt='popcrown' className='w-8 h-8' />
           <h1 className='font-bold'>POPCROWN</h1>
           <ModeToggle className='ml-auto w-8 h-8 [&_svg]:w-5' />
 
@@ -40,7 +40,7 @@ export const AppLayout: React.FC = () => {
             to='https://github.com/theBigBengi/top-movies'
             className={cn(
               buttonVariants({ size: "icon", variant: "ghost" }),
-              "h-8 w-8 p-0 rounded-full bg-black text-white ml-1"
+              "h-8 w-8 p-0 rounded-full bg-black text-white dark:bg-white dark:text-black ml-1"
             )}
             target='_blank'
           >
@@ -48,7 +48,7 @@ export const AppLayout: React.FC = () => {
           </Link>
         </header>
       </div>
-      <main className='px-4 pb-20 md:px-8 max-w-7xl mx-auto min-h-[calc(100dvh-106px)]'>
+      <main className='px-4 pb-20 md:px-8 max-w-7xl mx-auto min-h-[calc(100dvh-106px)]  flex flex-col'>
         <Outlet />
         <Toaster richColors />
       </main>

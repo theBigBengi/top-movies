@@ -5,15 +5,16 @@ import { useMovies } from "./use-movies";
 import { MovieItem } from "./movie-item";
 import { useLayout } from "@/hooks/use-layout";
 import { useSearchParams } from "react-router-dom";
+import { ResultsCounter } from "@/components/results-counter";
 
 export const Movies = () => {
   const {
-    movies,
-    isLoading,
-    error,
+    isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage,
+    isLoading,
+    movies,
+    error,
   } = useMovies();
   const [searchParams] = useSearchParams();
   const { layout } = useLayout();
@@ -72,8 +73,11 @@ export const Movies = () => {
 
   if (isLoading)
     return (
-      <div className='bg-red-100 h-full'>
-        <div className='loader mx-auto' />
+      <div className='my-auto '>
+        <div className=' flex justify-center gap-2 items-center text-muted-foreground'>
+          <div className='loader' />
+          Loading movies...
+        </div>
       </div>
     );
 
@@ -97,6 +101,12 @@ export const Movies = () => {
 
       {/* Sentinel element to observe when the user scrolls to the bottom */}
       <div ref={sentinelRef} className='h-1' />
+
+      <div className='mt-8'>
+        <p>
+          <ResultsCounter className='text-muted-foreground px-0 text-sm ' />
+        </p>
+      </div>
 
       {/* Loading indicator when fetching next page */}
       {isFetchingNextPage && (

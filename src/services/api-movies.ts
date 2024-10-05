@@ -18,7 +18,7 @@ export const getMovies = async ({
   sortBy?: string;
 }): Promise<MoviesSuccessResponse> => {
   const response = await fetch(
-    `${BASE_URL}?api_key=${API_KEY}&language=en-US&page=${pageParam}&sort_by=${sortBy}&append_to_response=credits`
+    `${BASE_URL}?api_key=${API_KEY}&language=en-US&page=${pageParam}&sort_by=${sortBy}`
   );
 
   const data: MoviesApiResponse = await response.json();
@@ -30,31 +30,9 @@ export const getMovies = async ({
   return data as MoviesSuccessResponse;
 };
 
-// export const getMovies = async ({
-//   page,
-//   sortBy = "vote_count.desc",
-// }: {
-//   page?: number;
-//   sortBy?: string;
-// }): Promise<MoviesSuccessResponse> => {
-//   const response = await fetch(
-//     `${BASE_URL}?api_key=${API_KEY}&language=en-US&page=${page}&sort_by=${sortBy}`
-//   );
-
-//   const data: MoviesApiResponse = await response.json();
-
-//   // Handle the error response, only ErrorResponse will have the 'success' property
-//   if ("success" in data && !data.success) {
-//     throw new Error(data.status_message);
-//   }
-
-//   // In the success case, we know 'data' is of type 'SuccessResponse', so we can safely access 'results'
-//   return data as MoviesSuccessResponse;
-// };
-
 export const getMovieById = async (id: number): Promise<Movie> => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=credits`
   );
 
   const data: Movie | MoviesErrorResponse = await response.json();

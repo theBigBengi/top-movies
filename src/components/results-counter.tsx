@@ -10,7 +10,7 @@ export const ResultsCounter = ({ className }: { className?: string }) => {
   const take = searchParams.get("take") || "20";
 
   return (
-    <p className={cn("px-1", className)}>
+    <span className={cn("px-1", className)}>
       Showing
       <span className='font-semibold mx-1'>{take}</span>
       titles out of
@@ -20,6 +20,6 @@ export const ResultsCounter = ({ className }: { className?: string }) => {
         {sortedBy[0].toUpperCase() +
           sortedBy.slice(1, sortedBy.length).replace("_", " ")}
       </span>
-    </p>
+    </span>
   );
 };
