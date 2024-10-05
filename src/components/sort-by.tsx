@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { useEffect, useRef, useState } from "react";
 
 export function SortBy({
   className,
@@ -25,8 +26,29 @@ export function SortBy({
   options: { value: string; label: string }[];
 }) {
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const [contentWidth, setContentWidth] = useState<number | undefined>();
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const sortBy = searchParams.get("sortBy") || defaultParamValue;
+
+  useEffect(() => {
+    const currentWidth = triggerRef?.current?.offsetWidth;
+
+    window.addEventListener("resize", () => {
+      if (!triggerRef?.current) return;
+      setContentWidth(currentWidth);
+    });
+
+    return () => {
+      window.removeEventListener("resize", () => {
+        setContentWidth(currentWidth);
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!triggerRef?.current) return;
+    setContentWidth(triggerRef?.current?.offsetWidth);
+  }, [triggerRef?.current?.offsetWidth]);
 
   function handleChange(newValue: string) {
     searchParams.set("sortBy", newValue);
@@ -34,31 +56,38 @@ export function SortBy({
   }
 
   return (
-    <div>
-      <DropdownMenu>
-        <div className={cn("flex gap-2 items-center", className)}>
-          <span className=' font-semibold'>{label ?? "Sort by"}</span>
-          <DropdownMenuTrigger className='flex items-center text-sky-600'>
-            <span>{options.find((o) => o.value === sortBy)?.label}</span>
-            <ChevronDown className='size-3.5 ml-1.5' />
-          </DropdownMenuTrigger>
-        </div>
-        <DropdownMenuContent className='p-0'>
-          <DropdownMenuLabel>{label ?? "Sort by"}</DropdownMenuLabel>
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        ref={triggerRef}
+        className={cn("flex items-center text-sky-600", className)}
+      >
+        <span>{options.find((o) => o.value === sortBy)?.label}</span>
+        <ChevronDown className='size-3.5 ml-1.5' />
+      </DropdownMenuTrigger>
 
-          <DropdownMenuSeparator className='my-0' />
+      <DropdownMenuContent
+        className='p-0'
+        style={{
+          minWidth: contentWidth ? `${contentWidth}px` : "auto",
+          width: contentWidth ? `${contentWidth}px` : "auto",
+        }}
+      >
+        <DropdownMenuLabel className='text-xs sm:text-sm'>
+          {label ?? "Sort by"}
+        </DropdownMenuLabel>
 
-          {options.map((opt) => (
-            <DropdownMenuItem
-              className='py-2.5 min-w-40 border-b last:border-b-0 rounded-none'
-              onClick={() => handleChange(opt.value)}
-              key={opt.value}
-            >
-              {opt.label}
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+        <DropdownMenuSeparator className='my-0' />
+
+        {options.map((opt) => (
+          <DropdownMenuItem
+            className='text-xs sm:text-sm py-2.5 min-w-40 border-b last:border-b-0 rounded-none'
+            onClick={() => handleChange(opt.value)}
+            key={opt.value}
+          >
+            {opt.label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

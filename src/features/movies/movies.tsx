@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useMovies } from "./use-movies";
 import { MovieItem } from "./movie-item";
 import { useLayout } from "@/hooks/use-layout";
+import { useSearchParams } from "react-router-dom";
 
 export const Movies = () => {
   const {
@@ -15,15 +16,23 @@ export const Movies = () => {
     isFetchingNextPage,
     count,
   } = useMovies();
+  const [searchParams] = useSearchParams();
+  const { layout } = useLayout();
 
-  const { layout, InfiniteScroll } = useLayout();
+  const takeParam = searchParams.get("take");
+  const isInfiniteScroll = takeParam === "infinite";
   const isGridView = layout === "grid";
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!hasNextPage || isFetchingNextPage || !InfiniteScroll) return;
+    if (
+      !hasNextPage ||
+      isFetchingNextPage ||
+      (!isInfiniteScroll && Number(takeParam || 20) <= movies.length)
+    )
+      return;
 
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -45,7 +54,7 @@ export const Movies = () => {
         observerRef.current.unobserve(sentinel);
       }
     };
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage, InfiniteScroll]);
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage, isInfiniteScroll]);
 
   if (error)
     return (
@@ -66,7 +75,9 @@ export const Movies = () => {
     ? "grid gap-4 grid-cols-[repeat(auto-fit,minmax(150px,1fr))] sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4"
     : "flex flex-col gap-4";
 
-  const moviesList = InfiniteScroll ? movies : movies?.slice(0, 20);
+  const moviesList = isInfiniteScroll
+    ? movies
+    : movies?.slice(0, Number(takeParam || 20));
 
   return (
     <>
@@ -92,7 +103,7 @@ export const Movies = () => {
       {!hasNextPage && <p className='text-center mt-4'>No more movies</p>}
 
       <div className='mt-4'>
-        Showing {InfiniteScroll ? "Infinite" : 20} results out of{" "}
+        Showing {isInfiniteScroll ? "Infinite" : 20} results out of{" "}
         {count.toLocaleString()}
       </div>
     </>

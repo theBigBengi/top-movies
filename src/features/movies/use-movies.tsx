@@ -4,7 +4,8 @@ import { useSearchParams } from "react-router-dom";
 
 export function useMovies() {
   const [searchParams] = useSearchParams();
-  const sortBy = searchParams.get("sort_by") || "vote_count.desc";
+  const sortParam = searchParams.get("sortBy") || "popularity";
+  const sortBy = `${sortParam}.desc`;
 
   const {
     data,
