@@ -10,20 +10,19 @@ export const Movies = () => {
     movies,
     isLoading,
     error,
-    // count,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
   } = useMovies();
 
-  const { layout } = useLayout();
+  const { layout, InfiniteScroll } = useLayout();
   const isGridView = layout === "grid";
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!hasNextPage || isFetchingNextPage) return;
+    if (!hasNextPage || isFetchingNextPage || !InfiniteScroll) return;
 
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -45,7 +44,7 @@ export const Movies = () => {
         observerRef.current.unobserve(sentinel);
       }
     };
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage, InfiniteScroll]);
 
   if (error)
     return (
@@ -61,10 +60,12 @@ export const Movies = () => {
     ? "grid gap-4 grid-cols-[repeat(auto-fit,minmax(150px,1fr))] sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4"
     : "flex flex-col gap-4";
 
+  const moviesList = InfiniteScroll ? movies : movies?.slice(0, 20);
+
   return (
     <>
       <ul className={cn(viewStyles)}>
-        {movies?.map((movie, i) => (
+        {moviesList.map((movie, i) => (
           <li key={movie.id}>
             <MovieItem rank={i + 1} movie={movie} />
           </li>
@@ -72,13 +73,12 @@ export const Movies = () => {
       </ul>
 
       {/* Sentinel element to observe when the user scrolls to the bottom */}
-      <div ref={sentinelRef} className='h-1'></div>
+      <div ref={sentinelRef} className='h-1' />
 
       {/* Loading indicator when fetching next page */}
       {isFetchingNextPage && (
         <div className='flex justify-center mt-4'>
           <p>Loading more movies...</p>
-          {/* Optionally, you can use a spinner component here */}
           <div className='loader'></div>
         </div>
       )}

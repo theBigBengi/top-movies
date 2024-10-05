@@ -1,5 +1,8 @@
-import React from "react";
+import { ChevronDown, InfinityIcon } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
+import React from "react";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,8 +11,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
 import { LayoutToggleButton } from "./layout-toggle-button";
+import { Button } from "@/components/ui/button";
+import { useLayout } from "@/hooks/use-layout";
 
 const options = [
   { value: "popularity.desc", label: "Popularity" },
@@ -29,8 +33,8 @@ function SortBy() {
   return (
     <div>
       <DropdownMenu>
-        <div className='flex gap-1'>
-          Sort by
+        <div className='flex gap-2 items-center text-sm'>
+          <span className=' font-semibold'>Sort by</span>
           <DropdownMenuTrigger className='flex items-center text-sky-600'>
             <span>{options.find((o) => o.value === sortBy)?.label}</span>
             <ChevronDown className='size-4 ml-2' />
@@ -57,10 +61,24 @@ function SortBy() {
 }
 
 export const MoviesTableOperations: React.FC = () => {
+  const { toggleInfiniteScroll } = useLayout();
+
   return (
-    <div className='flex items-center justify-between '>
+    <div className='flex items-center gap-1'>
       <SortBy />
+
+      <div className='ml-auto' />
       <LayoutToggleButton />
+      <Button
+        className='h-8 w-8 p-0'
+        variant='outline'
+        onClick={() => {
+          toggleInfiniteScroll();
+          toast.info("Infinity scroll enabled");
+        }}
+      >
+        <InfinityIcon className='w-4 h-4' />
+      </Button>
     </div>
   );
 };

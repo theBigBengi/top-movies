@@ -11,7 +11,7 @@ export const LayoutToggleButton: React.FC = () => {
       size='icon'
       variant='outline'
       onClick={toggleLayout}
-      className='h-9 w-9 rounded [&_svg]:w-5'
+      className='h-8 w-8 rounded [&_svg]:w-4'
     >
       {isGridView ? <LayoutListIcon /> : <LayoutGridIcon />}
     </Button>

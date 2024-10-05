@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { Toaster } from "@/components/ui/sonner";
 import { Outlet } from "react-router-dom";
+
 import { ModeToggle } from "./mode-toggle";
 
 export const AppLayout: React.FC = () => {
@@ -25,15 +27,16 @@ export const AppLayout: React.FC = () => {
         }`}
       >
         <header
-          className={`w-full max-w-7xl mx-auto  text-xl tracking-tight px-4 py-2  flex items-center gap-1`}
+          className={`w-full max-w-7xl mx-auto  text-lg tracking-tighter px-4 py-2  flex items-center gap-1`}
         >
           <img src='popcrown-logo.png' alt='popcrown' className='w-8 h-8' />
-          <h1 className='font-extrabold'>POPCROWN</h1>
+          <h1 className='font-bold'>POPCROWN</h1>
           <ModeToggle className='ml-auto w-8 h-8' />
         </header>
       </div>
-      <main className='p-4 max-w-7xl mx-auto'>
+      <main className='p-4 md:p-8 max-w-7xl mx-auto'>
         <Outlet />
+        <Toaster richColors />
       </main>
       <footer>
         <div className='w-full bg-background text-xl tracking-tight px-4 py-2 sticky bottom-0 z-10 flex items-center gap-1 '>
