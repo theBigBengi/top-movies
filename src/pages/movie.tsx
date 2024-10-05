@@ -12,7 +12,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { MoviePoster } from "@/components/movie-poster";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function Movie() {
@@ -63,11 +63,11 @@ export function Movie() {
             />
 
             <div className='flex '>
-              {movie.genres.map((genre) => (
+              {/* {movie.genres.map((genre) => (
                 <Badge variant='outline' key={genre.id} className=''>
                   {genre.name}
                 </Badge>
-              ))}
+              ))} */}
             </div>
           </div>
           <div>
