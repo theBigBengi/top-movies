@@ -13,6 +13,7 @@ export const Movies = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    count,
   } = useMovies();
 
   const { layout, InfiniteScroll } = useLayout();
@@ -54,7 +55,12 @@ export const Movies = () => {
       </div>
     );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className='bg-red-100 h-full'>
+        <div className='loader mx-auto' />
+      </div>
+    );
 
   const viewStyles = isGridView
     ? "grid gap-4 grid-cols-[repeat(auto-fit,minmax(150px,1fr))] sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4"
@@ -77,13 +83,18 @@ export const Movies = () => {
 
       {/* Loading indicator when fetching next page */}
       {isFetchingNextPage && (
-        <div className='flex justify-center mt-4'>
+        <div className='flex justify-center items-center text-muted-foreground mt-16 gap-2.5'>
+          <div className='loader' />
           <p>Loading more movies...</p>
-          <div className='loader'></div>
         </div>
       )}
 
       {!hasNextPage && <p className='text-center mt-4'>No more movies</p>}
+
+      <div className='mt-4'>
+        Showing {InfiniteScroll ? "Infinite" : 20} results out of{" "}
+        {count.toLocaleString()}
+      </div>
     </>
   );
 };

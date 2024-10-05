@@ -22,24 +22,24 @@ export const AppLayout: React.FC = () => {
   return (
     <div>
       <div
-        className={`w-full bg-background sticky top-0 z-10  transition-shadow duration-300 ${
+        className={`w-full bg-background sticky top-0 z-10 border-b  transition-shadow duration-300 ${
           isScrolled ? "shadow-sm" : ""
         }`}
       >
         <header
-          className={`w-full max-w-7xl mx-auto  text-lg tracking-tighter px-4 py-2  flex items-center gap-1`}
+          className={`w-full max-w-7xl mx-auto   text-lg tracking-tighter px-4 py-2 h-16  flex items-center gap-1`}
         >
           <img src='popcrown-logo.png' alt='popcrown' className='w-8 h-8' />
           <h1 className='font-bold'>POPCROWN</h1>
           <ModeToggle className='ml-auto w-8 h-8' />
         </header>
       </div>
-      <main className='p-4 md:p-8 max-w-7xl mx-auto'>
+      <main className='p-4 pb-20 md:p-8 max-w-7xl mx-auto min-h-[calc(100dvh-106px)]'>
         <Outlet />
         <Toaster richColors />
       </main>
       <footer>
-        <div className='w-full bg-background text-xl tracking-tight px-4 py-2 sticky bottom-0 z-10 flex items-center gap-1 '>
+        <div className='h-10 w-full text-sm text-muted-foreground  px-4 py-2 text-center'>
           <p>© 2024 Popcrown</p>
         </div>
       </footer>

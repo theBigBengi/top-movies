@@ -1,83 +1,55 @@
-import { ChevronDown, InfinityIcon } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
-import { toast } from "sonner";
+import { InfinityIcon, LayoutGridIcon, LayoutListIcon } from "lucide-react";
 import React from "react";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { LayoutToggleButton } from "./layout-toggle-button";
 import { Button } from "@/components/ui/button";
 import { useLayout } from "@/hooks/use-layout";
-
-const options = [
-  { value: "popularity.desc", label: "Popularity" },
-  { value: "vote_count.desc", label: "Votes" },
-];
-
-function SortBy() {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const sortBy = searchParams.get("sort_by") || "vote_count.desc";
-
-  function handleChange(newValue: string) {
-    searchParams.set("sort_by", newValue);
-    setSearchParams(searchParams);
-  }
-
-  return (
-    <div>
-      <DropdownMenu>
-        <div className='flex gap-2 items-center text-sm'>
-          <span className=' font-semibold'>Sort by</span>
-          <DropdownMenuTrigger className='flex items-center text-sky-600'>
-            <span>{options.find((o) => o.value === sortBy)?.label}</span>
-            <ChevronDown className='size-4 ml-2' />
-          </DropdownMenuTrigger>
-        </div>
-        <DropdownMenuContent className='p-0'>
-          <DropdownMenuLabel>Sort by</DropdownMenuLabel>
-
-          <DropdownMenuSeparator className='my-0' />
-
-          {options.map((opt) => (
-            <DropdownMenuItem
-              className='py-2.5 min-w-40 border-b last:border-b-0 rounded-none'
-              onClick={() => handleChange(opt.value)}
-              key={opt.value}
-            >
-              {opt.label}
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
-  );
-}
+// import { Toggle } from "@/components/ui/toggle"
+import { useMovies } from "./use-movies";
 
 export const MoviesTableOperations: React.FC = () => {
-  const { toggleInfiniteScroll } = useLayout();
-
+  const { layout, toggleLayout, toggleInfiniteScroll, InfiniteScroll } =
+    useLayout();
+  const { count } = useMovies(); // from cache
+  const isGridView = layout === "grid";
   return (
-    <div className='flex items-center gap-1'>
-      <SortBy />
-
+    <div className='flex items-center gap-1 flex-wrap'>
+      <div className='text-muted-foreground text-sm'>
+        Showing {InfiniteScroll ? "Infinite" : 20} titles out of{" "}
+        {count.toLocaleString()}
+      </div>
       <div className='ml-auto' />
-      <LayoutToggleButton />
+
       <Button
-        className='h-8 w-8 p-0'
+        onClick={toggleInfiniteScroll}
+        className='h-8 w-8 p-0 md:w-auto md:px-2 flex gap-2 items-center'
         variant='outline'
-        onClick={() => {
-          toggleInfiniteScroll();
-          toast.info("Infinity scroll enabled");
-        }}
       >
+        <span className='hidden md:inline-block'>Infinite Scroll</span>
         <InfinityIcon className='w-4 h-4' />
+      </Button>
+
+      {/* <Toggle pressed={InfiniteScroll} onPressedChange={toggleInfiniteScroll} variant="outline" aria-label="Toggle results">
+      <span className='hidden md:inline-block'>Infinite Scroll</span>
+        <InfinityIcon className='w-4 h-4' />
+    </Toggle> */}
+
+      <Button
+        size='icon'
+        variant='outline'
+        onClick={toggleLayout}
+        className='h-8 w-8 rounded md:w-auto md:px-2 flex gap-2 items-center [&_svg]:w-4'
+      >
+        {isGridView ? (
+          <>
+            <span className='hidden md:inline-block'>Rows View</span>
+            <LayoutListIcon />
+          </>
+        ) : (
+          <>
+            <span className='hidden md:inline-block'>Grid View</span>
+            <LayoutGridIcon />
+          </>
+        )}
       </Button>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { createContext, useState, ReactNode } from "react";
+import { toast } from "sonner";
 
 type Layout = "grid" | "row";
 
@@ -24,7 +25,10 @@ export const LayoutProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const toggleInfiniteScroll = () => {
-    setInfiniteScroll((prevScrollMode) => !prevScrollMode);
+    setInfiniteScroll((prevScrollMode) => {
+      toast.info(`Infinite scroll ${!prevScrollMode ? "enabled" : "disabled"}`);
+      return !prevScrollMode;
+    });
   };
 
   return (

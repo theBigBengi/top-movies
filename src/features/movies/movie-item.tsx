@@ -1,12 +1,13 @@
+import { Link, useLocation } from "react-router-dom";
+import { format } from "date-fns";
+
 import { MovieRating } from "@/components/movie-rating";
-import { Poster } from "@/components/poster";
+import { MoviePoster } from "@/components/movie-poster";
 import { buttonVariants } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { useLayout } from "@/hooks/use-layout";
+import { Card } from "@/components/ui/card";
 import { Movie } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import { Link, useLocation } from "react-router-dom";
 
 const RowItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
   const releaseDate = format(new Date(movie.release_date), "dd MMMM yyyy");
@@ -15,7 +16,12 @@ const RowItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
     <>
       <Card className='min-w-60'>
         <div className='flex items-center gap-4  w-full '>
-          <Poster path={movie.poster_path} className='rounded-l' />
+          <MoviePoster
+            wrapperStyles='w-24 min-h-32 md:min-w-40 md:min-h-52 border-r'
+            path={movie.poster_path}
+            className='rounded-l'
+            alt='Movie poster'
+          />
           <div className='grow py-2  flex flex-col '>
             <h2 className='font-bold '>
               {rank}. {movie.title}
@@ -38,8 +44,13 @@ const GridItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
   const location = useLocation();
   return (
     <div className='flex flex-col  border rounded-md shadow-sm'>
-      <Poster path={movie.poster_path} className='rounded-t' />
-      <div className='py-2 px-2 space-y-1 border-t'>
+      <MoviePoster
+        wrapperStyles='max-w-[290px] min-h-56 h-full border-t'
+        path={movie.poster_path}
+        className='rounded-t'
+        alt='Movie poster'
+      />
+      <div className='py-2 px-2 space-y-1'>
         <MovieRating
           voteAverage={movie.vote_average}
           voteCount={movie.vote_count}
@@ -52,9 +63,12 @@ const GridItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
         </p>
         <p className='text-sm text-muted-foreground'>{releaseDate}</p>
       </div>
-      <div className='p-2'>
+      <div className='py-3 px-2'>
         <Link
-          className={cn(buttonVariants({ variant: "secondary" }), "w-full")}
+          className={cn(
+            buttonVariants({ variant: "secondary", size: "sm" }),
+            "w-full"
+          )}
           to={`/movies/${movie.id}`}
           // This is the trick! Set the `backgroundLocation` in location state
           // so that when we open the modal we still see the current page in
