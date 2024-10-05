@@ -1,14 +1,8 @@
-import React from "react";
-
 import { useMovies } from "@/features/movies/use-movies";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "react-router-dom";
 
-export const ResultsCounter: React.FC = ({
-  className,
-}: {
-  className?: string;
-}) => {
+export const ResultsCounter = ({ className }: { className?: string }) => {
   const [searchParams] = useSearchParams();
   const { count } = useMovies(); // from cache
 
