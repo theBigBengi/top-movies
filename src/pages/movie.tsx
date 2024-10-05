@@ -45,54 +45,48 @@ export function Movie() {
 
   return (
     <Dialog open={open} onOpenChange={onDismiss}>
-      <DialogContent className='p-0  background bottom-0 left-0 max-w-2xl translate-x-0 translate-y-0 h-[65dvh] rounded-t-lg'>
+      <DialogContent className='p-0  background bottom-0 left-0 max-w-2xl translate-x-0 translate-y-0 h-[65dvh] rounded-t-lg '>
         <DialogHeader>
-          <DialogTitle className='py-4 px-2 bg-green-200 text-left'>
+          <DialogTitle className='py-4 px-2  text-left'>
             {movie?.title}
           </DialogTitle>
           <DialogDescription className='hidden'></DialogDescription>
         </DialogHeader>
         {/* <h1 className='font-semibold  h-12  top-0'>{movie?.title}</h1> */}
-        {/* <ScrollArea className='h-screen bg-purple-200 '> */}
-        <div>
-          {/* <MoviePoster
+        <ScrollArea className='h-screen  '>
+          <div>
+            <MoviePoster
               wrapperStyles='min-h-56 h-full bg-fixed '
               path={movie.backdrop_path}
               className=''
               alt='Movie backdrop'
-            /> */}
-          <div
-            className='h-56 bg-fixed '
-            style={{
-              backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movie.backdrop_path})`,
-            }}
-          ></div>
-
-          <div className='flex '>
-            {movie.genres.map((genre) => (
-              <Badge variant='outline' key={genre.id} className=''>
-                {genre.name}
-              </Badge>
-            ))}
-          </div>
-        </div>
-        <div>
-          <div className='flex items-center justify-between flex-wrap z-20'>
-            <MovieRating
-              voteAverage={movie.vote_average}
-              voteCount={movie.vote_count}
             />
+
+            <div className='flex '>
+              {movie.genres.map((genre) => (
+                <Badge variant='outline' key={genre.id} className=''>
+                  {genre.name}
+                </Badge>
+              ))}
+            </div>
           </div>
-          <p>{movie?.overview}</p>
-          <p>{movie?.overview}</p>
-          <p>{movie?.overview}</p>
-          <p>{movie?.overview}</p>
-          <p>{movie?.overview}</p>
-          <p>{movie?.overview}</p>
-          <p>{movie?.overview}</p>
-          <p>{movie?.overview}</p>
-        </div>
-        {/* </ScrollArea> */}
+          <div>
+            <div className='flex items-center justify-between flex-wrap z-20'>
+              <MovieRating
+                voteAverage={movie.vote_average}
+                voteCount={movie.vote_count}
+              />
+            </div>
+            <p>{movie?.overview}</p>
+            <p>{movie?.overview}</p>
+            <p>{movie?.overview}</p>
+            <p>{movie?.overview}</p>
+            <p>{movie?.overview}</p>
+            <p>{movie?.overview}</p>
+            <p>{movie?.overview}</p>
+            <p>{movie?.overview}</p>
+          </div>
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );
