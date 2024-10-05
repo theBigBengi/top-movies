@@ -80,7 +80,7 @@ export function SortBy({
 
         {options.map((opt) => (
           <DropdownMenuItem
-            className='text-xs sm:text-sm py-2.5 min-w-40 border-b last:border-b-0 rounded-none'
+            className='text-xs sm:text-sm py-2.5 min-w-40  rounded-none'
             onClick={() => handleChange(opt.value)}
             key={opt.value}
           >

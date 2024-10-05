@@ -14,7 +14,6 @@ export const Movies = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    count,
   } = useMovies();
   const [searchParams] = useSearchParams();
   const { layout } = useLayout();
@@ -54,7 +53,14 @@ export const Movies = () => {
         observerRef.current.unobserve(sentinel);
       }
     };
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage, isInfiniteScroll]);
+  }, [
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    isInfiniteScroll,
+    movies.length,
+    takeParam,
+  ]);
 
   if (error)
     return (
@@ -101,11 +107,6 @@ export const Movies = () => {
       )}
 
       {!hasNextPage && <p className='text-center mt-4'>No more movies</p>}
-
-      <div className='mt-4'>
-        Showing {isInfiniteScroll ? "Infinite" : 20} results out of{" "}
-        {count.toLocaleString()}
-      </div>
     </>
   );
 };

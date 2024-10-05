@@ -33,7 +33,8 @@ export const MoviesPage: React.FC = () => {
             defaultParamValue='popularity'
             options={[
               { value: "popularity", label: "Popularity" },
-              { value: "vote_count", label: "Votes" },
+              { value: "vote_count", label: "Votes count" },
+              { value: "vote_average", label: "Votes average" },
             ]}
           />
         </PageActions>
@@ -44,7 +45,7 @@ export const MoviesPage: React.FC = () => {
       </div>
 
       <Movies />
-
+      <ResultsCounter className='text-muted-foreground px-0 text-sm mt-4' />
       <ScrollToTopButton />
     </MoviesLayoutProvider>
   );

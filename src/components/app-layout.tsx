@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Toaster } from "@/components/ui/sonner";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 import { ModeToggle } from "./mode-toggle";
+import { buttonVariants } from "./ui/button";
+import { GithubIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export const AppLayout: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,10 +34,21 @@ export const AppLayout: React.FC = () => {
         >
           <img src='popcrown-logo.png' alt='popcrown' className='w-8 h-8' />
           <h1 className='font-bold'>POPCROWN</h1>
-          <ModeToggle className='ml-auto w-8 h-8' />
+          <ModeToggle className='ml-auto w-7 h-7 [&_svg]:w-4' />
+
+          <Link
+            to='https://github.com/theBigBengi/top-movies'
+            className={cn(
+              buttonVariants({ size: "icon", variant: "outline" }),
+              "h-7 w-7 p-0"
+            )}
+            target='_blank'
+          >
+            <GithubIcon className='w-4' />
+          </Link>
         </header>
       </div>
-      <main className='p-4 pb-20 md:p-8 max-w-7xl mx-auto min-h-[calc(100dvh-106px)]'>
+      <main className='px-4 pb-20 md:px-8 max-w-7xl mx-auto min-h-[calc(100dvh-106px)]'>
         <Outlet />
         <Toaster richColors />
       </main>

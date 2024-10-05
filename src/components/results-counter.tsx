@@ -9,22 +9,23 @@ export const ResultsCounter: React.FC = ({
 }: {
   className?: string;
 }) => {
-  const { count } = useMovies(); // from cache
   const [searchParams] = useSearchParams();
+  const { count } = useMovies(); // from cache
 
   const sortedBy = searchParams.get("sortBy") || "popularity";
   const take = searchParams.get("take") || "20";
 
   return (
-    <span className={cn("px-1", className)}>
+    <p className={cn("px-1", className)}>
       Showing
       <span className='font-semibold mx-1'>{take}</span>
       titles out of
       <span className='font-semibold mx-1'>{count.toLocaleString()}</span>
       results sorted by
       <span className='font-semibold mx-1'>
-        {sortedBy[0].toUpperCase() + sortedBy.slice(1, sortedBy.length)}
+        {sortedBy[0].toUpperCase() +
+          sortedBy.slice(1, sortedBy.length).replace("_", " ")}
       </span>
-    </span>
+    </p>
   );
 };

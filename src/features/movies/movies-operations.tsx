@@ -1,4 +1,4 @@
-import { InfinityIcon, LayoutGridIcon, LayoutListIcon } from "lucide-react";
+import { InfinityIcon, LayoutGridIcon, Rows3Icon } from "lucide-react";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -31,7 +31,7 @@ export const MoviesTableOperations: React.FC = () => {
         {isGridView ? (
           <>
             <span className='hidden sm:inline-block'>Rows View</span>
-            <LayoutListIcon />
+            <Rows3Icon />
           </>
         ) : (
           <>

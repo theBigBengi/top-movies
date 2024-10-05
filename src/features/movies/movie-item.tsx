@@ -8,30 +8,43 @@ import { useLayout } from "@/hooks/use-layout";
 import { Card } from "@/components/ui/card";
 import { Movie } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { CalendarIcon, InfoIcon } from "lucide-react";
 
 const RowItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
-  const releaseDate = format(new Date(movie.release_date), "dd MMMM yyyy");
+  const releaseDate = movie.release_date
+    ? format(new Date(movie.release_date), "dd MMM yyyy")
+    : "No data";
+  const releaseDateDesktop = movie.release_date
+    ? format(new Date(movie.release_date), "dd MMMM yyyy")
+    : "No data";
 
   return (
     <>
-      <Card className='min-w-60'>
+      <Card className='min-w-72'>
         <div className='flex items-center gap-4  w-full '>
           <MoviePoster
-            wrapperStyles='w-24 min-h-32 md:min-w-40 md:min-h-52 border-r'
+            wrapperStyles='min-w-24 w-24 min-h-32 md:min-w-40 md:min-h-52 border-r'
             path={movie.poster_path}
-            className='rounded-l'
+            className='rounded-l-md'
             alt='Movie poster'
           />
-          <div className='grow py-2  flex flex-col '>
+          <div className='grow py-2 flex flex-col '>
             <h2 className='font-bold '>
               {rank}. {movie.title}
             </h2>
-            <p className='text-sm'>Release Date: {releaseDate}</p>
+            <p className='text-xs sm:text-sm text-muted-foreground flex items-center'>
+              <CalendarIcon className='w-3.5 h-3.5 inline-block mr-1' />
+              <span className='block md:hidden'>{releaseDate}</span>
+              <span className='md:block hidden'>{releaseDateDesktop}</span>
+            </p>
             <p className='text-sm hidden md:block'>{movie.overview}</p>
             <MovieRating
               voteAverage={movie.vote_average}
               voteCount={movie.vote_count}
             />
+          </div>
+          <div className=' h-full min-w-10 sm:w-28'>
+            <InfoIcon className='h-5 w-5 sm:w-7 sm:h-7 sm:mx-auto' />
           </div>
         </div>
       </Card>
@@ -40,7 +53,13 @@ const RowItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
 };
 
 const GridItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
-  const releaseDate = format(new Date(movie.release_date), "dd MMMM yyyy");
+  const releaseDate = movie.release_date
+    ? format(new Date(movie.release_date), "dd MMM yyyy")
+    : "No data";
+  const releaseDateDesktop = movie.release_date
+    ? format(new Date(movie.release_date), "dd MMMM yyyy")
+    : "No data";
+
   const location = useLocation();
   return (
     <div className='flex flex-col  border rounded-md shadow-sm'>
@@ -61,7 +80,11 @@ const GridItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
         <p className=' hidden sm:block sm:h-20 text-xs md:text-sm md:h-36 overflow-hidden text-ellipsis line-clamp-6'>
           {movie.overview}
         </p>
-        <p className='text-sm text-muted-foreground'>{releaseDate}</p>
+        <p className='text-sm text-muted-foreground flex items-center'>
+          <CalendarIcon className='w-3.5 h-3.5 inline-block mr-1' />
+          <span className='block md:hidden'>{releaseDate}</span>
+          <span className='md:block hidden'>{releaseDateDesktop}</span>
+        </p>
       </div>
       <div className='py-3 px-2'>
         <Link
