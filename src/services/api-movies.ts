@@ -5,9 +5,6 @@ import {
   MoviesSuccessResponse,
 } from "@/lib/types";
 
-const BASE_URL = "https://api.themoviedb.org/3";
-const API_KEY = "4170bf35f7a61b8012d65de6ad644b9b";
-
 export const getMovies = async ({
   pageParam = 1,
   sortBy = "vote_count.desc",
@@ -16,7 +13,9 @@ export const getMovies = async ({
   sortBy?: string; // Sorting criteria, e.g., 'popularity.desc'
 }): Promise<MoviesSuccessResponse> => {
   const response = await fetch(
-    `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&page=${pageParam}&sort_by=${sortBy}`
+    `${import.meta.env.VITE_BASE_URL}/discover/movie?api_key=${
+      import.meta.env.VITE_API_KEY
+    }&language=en-US&page=${pageParam}&sort_by=${sortBy}`
   );
 
   const data: MoviesApiResponse = await response.json();
@@ -31,7 +30,9 @@ export const getMovies = async ({
 
 export const getMovieById = async (id: number): Promise<DetailedMovie> => {
   const response = await fetch(
-    `${BASE_URL}/movie/${id}?api_key=${API_KEY}&append_to_response=credits`
+    `${import.meta.env.VITE_BASE_URL}/movie/${id}?api_key=${
+      import.meta.env.VITE_API_KEY
+    }&append_to_response=credits`
   );
 
   const data: DetailedMovie | MoviesErrorResponse = await response.json();

@@ -32,8 +32,10 @@ export const AssignmentPage: React.FC = () => {
         </PageHeaderHeading>
 
         <PageHeaderDescription>
-          The purposes of the site are demonstration of abilities, learning and
-          entertainment. Here are the original definitions of the task
+          The starting point of the site was a task to demonstrate coding
+          abilities and has no profit motive. For fun, I deepened the work on
+          the site and expanded the task definitions. Below are the original
+          definitions of the task. Feel free to check out the GitHub repository
         </PageHeaderDescription>
       </PageHeader>
 
@@ -110,10 +112,6 @@ export const AssignmentPage: React.FC = () => {
                   API Documentation
                 </a>
                 .
-              </li>
-              <li>
-                API key to use:{" "}
-                <strong>4170bf35f7a61b8012d65de6ad644b9b</strong>.
               </li>
               <li>
                 The link to retrieve the top movies list:{" "}

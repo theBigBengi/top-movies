@@ -30,7 +30,7 @@ export const MoviesPage: React.FC = () => {
       <PageHeader>
         <Link
           className='group inline-flex items-center px-0.5 text-sm font-medium'
-          to='#'
+          to='/assignment'
         >
           <ClipboardListIcon className='h-4 w-4' />{" "}
           <Separator className='mx-2 h-4' orientation='vertical' />{" "}
