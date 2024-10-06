@@ -38,6 +38,6 @@ Make sure you have the following installed on your machine:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/theBigBengi/movie-explorer-app.git
-   cd movie-explorer-app
+   git clone https://github.com/theBigBengi/top-movies.git
+   cd top-movies
    ```
