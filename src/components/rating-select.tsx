@@ -16,7 +16,7 @@ interface RatingProps {
   onRatingChange?: (rating: number) => void; // Callback when rating changes
 }
 
-export const Rating: React.FC<RatingProps> = ({
+export const RatingSelect: React.FC<RatingProps> = ({
   totalStars = 10,
   onRatingChange,
   className,
@@ -50,11 +50,13 @@ export const Rating: React.FC<RatingProps> = ({
           Rate
         </span>
       </PopoverTrigger>
-      <PopoverContent className='w-auto relative'>
+      <PopoverContent className='w-auto relative max-w-96'>
         <div className='flex flex-col items-center gap-4 px-2'>
           <div className='flex flex-col items-center '>
             <p className='text-muted-foreground text-sm'>Rate this title</p>
-            <h2 className='mx-auto font-bold text-xl'>{movie.title}</h2>
+            <h2 className='mx-auto font-bold text-xl text-wrap'>
+              {movie.title}
+            </h2>
           </div>
           <div className='w-16 h-16 rounded-full bg-black flex items-center justify-center dark:text-black dark:bg-white text-white text-4xl font-extrabold'>
             {rating === 0 ? "?" : rating}

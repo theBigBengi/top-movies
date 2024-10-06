@@ -10,13 +10,14 @@ export function useMovies() {
   // Keep on less code in the components
   // ** Good for sharing links
   const sortParam = searchParams.get("sortBy") || "popularity";
+  // Adding all requests votes count filter to avoid unwanted results
   const sortBy = `${sortParam}.desc&vote_count.gte=500`;
   const takeParam = searchParams.get("take");
 
-  // 1. Pagination ?
+  // Pagination ?
   // Depends on taste and design preference.
 
-  // 2. Infinite Scroll
+  // Infinite Scroll
   const {
     isFetchingNextPage,
     fetchNextPage,

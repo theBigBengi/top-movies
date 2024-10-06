@@ -9,7 +9,7 @@ import { useLayout } from "@/hooks/use-layout";
 import { Card } from "@/components/ui/card";
 import { Movie } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { Rating } from "@/components/rating";
+import { RatingSelect } from "@/components/rating-select";
 
 /**
  * Formats the movie release date into two formats: compact and full.
@@ -65,7 +65,7 @@ const MovieDetails = ({
         voteAverage={movie.vote_average}
         voteCount={movie.vote_count}
       />
-      <Rating
+      <RatingSelect
         className='[&>span>svg]:size-4 text-sm font-semibold'
         movie={movie}
       />
@@ -144,7 +144,7 @@ const GridItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
             voteAverage={movie.vote_average}
             voteCount={movie.vote_count}
           />
-          <Rating
+          <RatingSelect
             className='[&>span>svg]:size-4 text-sm font-semibold'
             movie={movie}
           />

@@ -12,7 +12,7 @@ import { MoviePoster } from "@/components/movie-poster";
 import { useMovie } from "@/features/movies/use-movie";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Rating } from "@/components/rating";
+import { RatingSelect } from "@/components/rating-select";
 import { DetailedMovie } from "@/lib/types";
 import {
   Dialog,
@@ -28,7 +28,7 @@ export function Movie() {
 
   const [open, setOpen] = useState(true);
   function onDismiss(open: boolean) {
-    navigate("/movies");
+    navigate(-1);
     setOpen(open);
   }
 
@@ -70,7 +70,7 @@ export function Movie() {
 function MovieDetails({ movie }: { movie: DetailedMovie | undefined }) {
   const navigate = useNavigate();
   if (!movie) {
-    navigate("/movies");
+    navigate(-1);
     return null;
   }
 
@@ -109,7 +109,7 @@ function MovieDetails({ movie }: { movie: DetailedMovie | undefined }) {
               outOf={10}
             />
 
-            <Rating movie={movie} />
+            <RatingSelect movie={movie} />
           </div>
           <p className='text-muted-foreground'>{movie.overview}</p>
 
@@ -126,13 +126,13 @@ function MovieDetails({ movie }: { movie: DetailedMovie | undefined }) {
           <div className='flex flex-row p-2 gap-1 mt-auto'>
             <Button
               variant='outline'
-              className='w-full text-blue-500 border-blue-500 hover:bg-blue-500'
+              className='w-full text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white'
             >
               Trailer
             </Button>
             <Button
               variant='outline'
-              className=' w-full gap-1 text-blue-500 border-blue-500 hover:bg-blue-500'
+              className=' w-full gap-1 text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white'
             >
               <span>
                 <Plus className='w-4 h-4 ' />
