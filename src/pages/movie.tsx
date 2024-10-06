@@ -54,8 +54,8 @@ export function Movie() {
         // className='p-0  bottom-0 left-0 max-w-2xl translate-x-0 translate-y-0 h-[75dvh] rounded-t-lg border-none'
         className={cn(
           "fixed left-1/2 bottom-0 z-50 w-full max-w-lg translate-x-[-50%] border bg-background p-6 shadow-lg duration-200 top-auto",
-          "data-[state=open]:animate-slide-in data-[state=closed]:animate-slide-out",
           "p-0 min-h-[70dvh] rounded-t-lg border-none  max-w-2xl  translate-y-0 fixed left-1/2 bottom-0 z-50 w-full translate-x-[-50%] border bg-background shadow-lg duration-200",
+          "data-[state=open]:animate-slide-in data-[state=closed]:animate-slide-out",
           matches &&
             `${dialogContentStyles} sm:translate-x-[-50%] sm:translate-y-[-50%] sm:left-[50%] sm:bottom-auto p-0`
         )}

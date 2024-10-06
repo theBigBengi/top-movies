@@ -7,7 +7,11 @@ function Filter({
   options,
 }: {
   filterField: string;
-  options: { value: string; label: string | ReactNode }[];
+  options: {
+    value: string;
+    label: string | ReactNode;
+    callBack?: (value: string) => void;
+  }[];
 }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilter = searchParams.get(filterField) || options.at(0)?.value;
@@ -22,7 +26,12 @@ function Filter({
       {options.map((option) => (
         <button
           key={option.value}
-          onClick={() => handleClick(option.value)}
+          onClick={() => {
+            handleClick(option.value);
+            if (option.callBack) {
+              option.callBack(option.value);
+            }
+          }}
           disabled={option.value === currentFilter}
           className={cn(
             `h-6 px-3 text-xs w-10 font-medium py-0 rounded-md transition-all duration-300`,

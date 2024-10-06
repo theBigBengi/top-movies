@@ -19,11 +19,13 @@ export function SortBy({
   label,
 }: {
   className?: string;
-
   label?: string;
-
   defaultParamValue: string;
-  options: { value: string; label: string }[];
+  options: {
+    value: string;
+    label: string;
+    callBack?: (value: string) => void;
+  }[];
 }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [contentWidth, setContentWidth] = useState<number | undefined>();
@@ -81,7 +83,10 @@ export function SortBy({
         {options.map((opt) => (
           <DropdownMenuItem
             className='text-xs sm:text-sm py-2.5 min-w-40  rounded-none'
-            onClick={() => handleChange(opt.value)}
+            onClick={() => {
+              handleChange(opt.value);
+              if (opt.callBack) opt.callBack(opt.value);
+            }}
             key={opt.value}
           >
             {opt.label}

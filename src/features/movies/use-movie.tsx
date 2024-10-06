@@ -1,8 +1,5 @@
 import { getMovieById } from "@/services/api-movies";
-import {
-  useQuery,
-  //  useQueryClient
-} from "react-query";
+import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
 export function useMovie() {

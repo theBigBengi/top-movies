@@ -4,10 +4,9 @@ import { cn } from "@/lib/utils";
 import { useMovies } from "./use-movies";
 import { MovieItem } from "./movie-item";
 import { useLayout } from "@/hooks/use-layout";
-import { useSearchParams } from "react-router-dom";
 import { ResultsCounter } from "@/components/results-counter";
 
-export const Movies = () => {
+export const MoviesList = () => {
   const {
     isFetchingNextPage,
     fetchNextPage,
@@ -16,24 +15,17 @@ export const Movies = () => {
     movies,
     error,
   } = useMovies();
-  const [searchParams] = useSearchParams();
-  const { layout } = useLayout();
-
-  const takeParam = searchParams.get("take");
-  const isInfiniteScroll = takeParam === "infinite";
-  const isGridView = layout === "grid";
-
   const observerRef = useRef<IntersectionObserver | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const { isGrid } = useLayout();
+  const viewStyles = isGrid
+    ? "grid gap-4 grid-cols-[repeat(auto-fit,minmax(150px,1fr))] sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4"
+    : "flex flex-col gap-4";
 
   useEffect(() => {
-    if (
-      !hasNextPage ||
-      isFetchingNextPage ||
-      (!isInfiniteScroll && Number(takeParam || 20) <= movies.length)
-    )
-      return;
+    if (!hasNextPage || isFetchingNextPage) return;
 
+    // Create the IntersectionObserver when the component mounts
     observerRef.current = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
@@ -44,30 +36,25 @@ export const Movies = () => {
       { threshold: 1.0 }
     );
 
+    // Sentinel element to observe when the user scrolls to the bottom
     const sentinel = sentinelRef.current;
     if (sentinel) {
       observerRef.current.observe(sentinel);
     }
 
     return () => {
+      // Clean up the observer when the component unmounts
       if (observerRef.current && sentinel) {
         observerRef.current.unobserve(sentinel);
       }
     };
-  }, [
-    hasNextPage,
-    isFetchingNextPage,
-    fetchNextPage,
-    isInfiniteScroll,
-    movies.length,
-    takeParam,
-  ]);
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage, movies.length]);
 
   if (error)
     return (
       <div>
         <h1>Error</h1>
-        {error instanceof Error ? error.message : null}
+        {error instanceof Error ? error.message : "Something went wrong"}
       </div>
     );
 
@@ -81,18 +68,10 @@ export const Movies = () => {
       </div>
     );
 
-  const viewStyles = isGridView
-    ? "grid gap-4 grid-cols-[repeat(auto-fit,minmax(150px,1fr))] sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4"
-    : "flex flex-col gap-4";
-
-  const moviesList = isInfiniteScroll
-    ? movies
-    : movies?.slice(0, Number(takeParam || 20));
-
   return (
     <>
       <ul className={cn(viewStyles)}>
-        {moviesList.map((movie, i) => (
+        {movies.map((movie, i) => (
           <li key={movie.id}>
             <MovieItem rank={i + 1} movie={movie} />
           </li>

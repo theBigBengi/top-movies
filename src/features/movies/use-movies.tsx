@@ -1,30 +1,57 @@
+import { Movie } from "@/lib/types";
 import { getMovies } from "@/services/api-movies";
 import { useInfiniteQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
+
+// Helper function to determine the page limit based on "take" parameter
+const calculatePageLimit = (
+  takeParam: string | null,
+  allPages: { page: number; results: Movie[] }[]
+) => {
+  if (takeParam === "all") return allPages.length + 1;
+
+  const takeNumber = Number(takeParam);
+  if (!isNaN(takeNumber) && takeNumber % 20 === 0) {
+    return takeNumber / 20;
+  }
+
+  return 1;
+};
 
 export function useMovies() {
   const [searchParams] = useSearchParams();
   const sortParam = searchParams.get("sortBy") || "popularity";
   const sortBy = `${sortParam}.desc&vote_count.gte=500`;
 
+  const takeParam = searchParams.get("take");
+
   const {
-    data,
-    error,
-    isLoading,
+    isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage,
+    isLoading,
+    error,
+    data,
   } = useInfiniteQuery({
     queryKey: ["movies", sortBy],
     queryFn: ({ pageParam = 1 }) => getMovies({ pageParam, sortBy }),
-    getNextPageParam: (lastPage) => {
+    getNextPageParam: (lastPage, allPages) => {
       const nextPage = lastPage.page + 1;
-      return nextPage <= lastPage.total_pages ? nextPage : undefined;
+      const limit = calculatePageLimit(takeParam, allPages);
+
+      // Limit the number of pages to 3
+      return nextPage <= lastPage.total_pages && allPages.length < limit
+        ? nextPage
+        : undefined;
     },
   });
 
-  // Flatten the results so it's easier to work with.
-  const movies = data?.pages.flatMap((page) => page.results) || [];
+  // Flatten results and adjust movie list based on "take" parameter
+  const movies =
+    data?.pages
+      .flatMap((page) => page.results)
+      .slice(0, takeParam === "all" ? undefined : Number(takeParam || 20)) ||
+    [];
   const count = data?.pages[0].total_results || 0;
 
   return {
@@ -33,33 +60,7 @@ export function useMovies() {
     movies,
     count,
     fetchNextPage,
-    hasNextPage,
+    hasNextPage: hasNextPage,
     isFetchingNextPage,
   };
 }
-
-// import { getMovies } from "@/services/api-movies";
-// import {
-//   useQuery,
-//   //  useQueryClient
-// } from "react-query";
-// import { useSearchParams } from "react-router-dom";
-
-// export function useMovies() {
-//   //   const queryClient = useQueryClient();
-//   const [searchParams] = useSearchParams();
-
-//   const page = parseInt(searchParams.get("page") || "1");
-//   const sortBy = searchParams.get("sort_by") || "vote_count.desc";
-
-//   const {
-//     isLoading,
-//     data: { total_results: count, results: movies } = {},
-//     error,
-//   } = useQuery({
-//     queryKey: ["movies", page, sortBy],
-//     queryFn: () => getMovies({ page, sortBy }),
-//   });
-
-//   return { isLoading, error, movies, count };
-// }
