@@ -1,22 +1,8 @@
-import { Movie } from "@/lib/types";
-import { getMovies } from "@/services/api-movies";
-import { useInfiniteQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
+import { useInfiniteQuery } from "react-query";
 
-// Helper function to determine the page limit based on "take" parameter
-const calculatePageLimit = (
-  takeParam: string | null,
-  allPages: { page: number; results: Movie[] }[]
-) => {
-  if (takeParam === "all") return allPages.length + 1;
-
-  const takeNumber = Number(takeParam);
-  if (!isNaN(takeNumber) && takeNumber % 20 === 0) {
-    return takeNumber / 20;
-  }
-
-  return 1;
-};
+import { calculatePageLimit } from "@/lib/api-utils";
+import { getMovies } from "@/services/api-movies";
 
 export function useMovies() {
   const [searchParams] = useSearchParams();
@@ -55,12 +41,12 @@ export function useMovies() {
   const count = data?.pages[0].total_results || 0;
 
   return {
-    isLoading,
-    error,
-    movies,
-    count,
-    fetchNextPage,
-    hasNextPage: hasNextPage,
     isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    isLoading,
+    movies,
+    error,
+    count,
   };
 }

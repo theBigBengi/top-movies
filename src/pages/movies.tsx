@@ -15,7 +15,6 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
-import { toast } from "sonner";
 
 const sortByOptions = [
   { value: "popularity", label: "Popularity" },
@@ -57,7 +56,6 @@ export const MoviesPage: React.FC = () => {
             onClick={() => {
               searchParams.set("take", "all");
               setSearchParams(searchParams);
-              toast.info("Showing all titles");
             }}
           >
             Show all titles

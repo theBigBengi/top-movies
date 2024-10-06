@@ -65,19 +65,23 @@ export interface DetailedMovie extends Movie {
   status: string;
   tagline: string;
   credits?: {
-    cast: Array<{
-      adult: boolean;
-      gender: number;
-      id: number;
-      known_for_department: string;
-      name: string;
-      original_name: string;
-      popularity: number;
-      profile_path: string;
-      cast_id: number;
-      character: string;
-      credit_id: string;
-      order: number;
-    }>;
+    cast: Credit[];
+    crew: Credit[];
   };
 }
+
+type Credit = {
+  adult: boolean;
+  gender: number;
+  id: number;
+  job: string;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
+};
