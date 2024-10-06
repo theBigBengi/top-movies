@@ -12,13 +12,14 @@ export const ResultsCounter = ({ className }: { className?: string }) => {
   return (
     <span className={cn("px-1", className)}>
       Showing
-      <span className='font-semibold mx-1'>{take}</span>
+      <span className='font-bold mx-1 capitalize'>{take}</span>
       titles out of
-      <span className='font-semibold mx-1'>{count.toLocaleString()}</span>
+      <span className='font-bold mx-1 '>{count.toLocaleString()}</span>
       results sorted by
-      <span className='font-semibold mx-1'>
+      <span className='font-bold mx-1 capitalize'>
         {sortedBy[0].toUpperCase() +
           sortedBy.slice(1, sortedBy.length).replace("_", " ")}
+        .
       </span>
     </span>
   );
