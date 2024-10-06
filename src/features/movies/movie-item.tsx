@@ -9,6 +9,7 @@ import { useLayout } from "@/hooks/use-layout";
 import { Card } from "@/components/ui/card";
 import { Movie } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { Rating } from "@/components/rating";
 
 /**
  * Formats the movie release date into two formats: compact and full.
@@ -59,10 +60,16 @@ const MovieDetails = ({
     <p className='text-sm hidden md:block'>{movie.overview}</p>
 
     {/* Rating */}
-    <MovieRating
-      voteAverage={movie.vote_average}
-      voteCount={movie.vote_count}
-    />
+    <div className='flex items-center gap-4'>
+      <MovieRating
+        voteAverage={movie.vote_average}
+        voteCount={movie.vote_count}
+      />
+      <Rating
+        className='[&>span>svg]:size-4 text-sm font-semibold'
+        movie={movie}
+      />
+    </div>
   </>
 );
 
@@ -132,10 +139,17 @@ const GridItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
 
       {/* Rating, title, overview, release date */}
       <div className='py-2 px-2 flex flex-col flex-grow space-y-1'>
-        <MovieRating
-          voteAverage={movie.vote_average}
-          voteCount={movie.vote_count}
-        />
+        <div className='flex justify-between'>
+          <MovieRating
+            voteAverage={movie.vote_average}
+            voteCount={movie.vote_count}
+          />
+          <Rating
+            className='[&>span>svg]:size-4 text-sm font-semibold'
+            movie={movie}
+          />
+        </div>
+
         <h2 className='font-bold h-12 text-ellipsis overflow-hidden line-clamp-2'>
           <span>{rank}.</span> {movie.title}
         </h2>

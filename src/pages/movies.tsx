@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowRightIcon, PieChart } from "lucide-react";
+import { ArrowRightIcon, ClipboardListIcon } from "lucide-react";
 
 import { MoviesListCustomization } from "@/features/movies/movies-list-customization";
 import { LayoutProvider as MoviesLayoutProvider } from "@/context/layout-provider";
@@ -32,10 +32,10 @@ export const MoviesPage: React.FC = () => {
           className='group inline-flex items-center px-0.5 text-sm font-medium'
           to='#'
         >
-          <PieChart className='h-4 w-4' />{" "}
+          <ClipboardListIcon className='h-4 w-4' />{" "}
           <Separator className='mx-2 h-4' orientation='vertical' />{" "}
           <span className='underline-offset-4 group-hover:underline'>
-            npx shadcn init
+            Show assignment objectives
           </span>
           <ArrowRightIcon className='ml-1 h-4 w-4' />
         </Link>

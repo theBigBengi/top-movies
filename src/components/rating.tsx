@@ -43,7 +43,7 @@ export const Rating: React.FC<RatingProps> = ({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger className=''>
+      <PopoverTrigger className={className}>
         <span className='flex gap-1 text-blue-600 group items-center'>
           <Star className='group-hover:hidden block h-6 w-6 cursor-pointer transition-all duration-150' />
           <Star className='group-hover:block hidden h-6 w-6 fill-blue-600 cursor-pointer transition-all duration-150' />
@@ -74,8 +74,7 @@ export const Rating: React.FC<RatingProps> = ({
                       ? "fill-yellow-400 stroke-yellow-400" // Filled star when hovered
                       : rating >= star
                       ? "fill-yellow-400 stroke-yellow-400" // Filled star when selected
-                      : "stroke-gray-400", // Empty star
-                    className
+                      : "stroke-gray-400" // Empty star
                   )}
                 />
               );

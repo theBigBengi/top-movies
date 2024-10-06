@@ -6,6 +6,7 @@ import { PageNotFound } from "./pages/page-not-found";
 import { AppLayout } from "./components/app-layout";
 import { MoviesPage } from "./pages/movies";
 import { Movie } from "./pages/movie";
+import { AssignmentPage } from "./pages/assignment";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,6 +34,7 @@ function App() {
           <Route path='/' element={<AppLayout />}>
             <Route index element={<Navigate replace to='movies' />} />
             <Route path='movies' element={<MoviesPage />} />
+            <Route path='assignment' element={<AssignmentPage />} />
             <Route path='*' element={<PageNotFound />} />
           </Route>
         </Routes>
