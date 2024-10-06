@@ -1,6 +1,6 @@
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { useNavigate } from "react-router-dom";
-import { useMediaQuery } from "usehooks-ts";
+
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -9,19 +9,15 @@ import { useMovie } from "@/features/movies/use-movie";
 import {
   Dialog,
   DialogContent,
-  dialogContentStyles,
   DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { MoviePoster } from "@/components/movie-poster";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
 
 export function Movie() {
   const navigate = useNavigate();
-  const matches = useMediaQuery("(min-width: 600px)");
   const { movie, isLoading, error } = useMovie();
 
   const [open, setOpen] = useState(true);
