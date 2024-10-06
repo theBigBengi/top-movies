@@ -1,50 +1,43 @@
-# React + TypeScript + Vite
+# Movie Explorer App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+The Movie Explorer App is a modern web application built with **Vite**, **TypeScript**, **Tailwind CSS**, and **React Query**. This application allows users to explore the top 20 most popular movies fetched from **The Movie Database (TMDb)** API. The app includes advanced features such as sorting, filtering, pagination, and infinite scrolling, providing an intuitive user experience for movie enthusiasts.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Top 20 Popular Movies**: Display a dynamic list of the top 20 most popular movies from TMDb.
+- **Movie Details Modal**: Users can click on a movie to open a detailed dialog page that presents additional information.
+- **Sorting & Filtering Options**: Easily sort and filter movies based on different criteria.
+- **Load More Results**: Fetch more movies beyond the initial display.
+- **Infinite Scroll**: Automatically loads the next page of movies when scrolling to the bottom of the page.
+- **Responsive Design**: Fully optimized for mobile and desktop views using Tailwind CSS.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tech Stack
 
-- Configure the top-level `parserOptions` property like this:
+- **Vite**: Fast and modern build tool for frontend development.
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: Adds static typing to JavaScript for better development practices.
+- **Tailwind CSS**: A utility-first CSS framework for styling.
+- **React Query**: A library for fetching, caching, and updating asynchronous data in React.
+- **TMDb API**: External API used to fetch movie data.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Getting Started
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+To set up the project locally, follow these steps:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Prerequisites
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Make sure you have the following installed on your machine:
+
+- [Node.js](https://nodejs.org/) (version 14 or above)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+### Installation
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/theBigBengi/movie-explorer-app.git
+   cd movie-explorer-app
+   ```

@@ -155,9 +155,11 @@ const GridItem = ({ movie, rank }: { movie: Movie; rank: number }) => {
         </h2>
 
         {/* Overview */}
-        <p className='hidden sm:block sm:h-20 text-xs md:text-sm md:h-36 overflow-hidden text-ellipsis line-clamp-6'>
-          {movie.overview}
-        </p>
+        <div className='pb-2'>
+          <p className='hidden sm:block sm:h-20 text-xs md:text-sm md:h-36 overflow-hidden text-ellipsis line-clamp-6 text-muted-foreground'>
+            {movie.overview}
+          </p>
+        </div>
 
         {/* Release date */}
         <p className='text-sm text-muted-foreground flex items-center mt-auto'>
