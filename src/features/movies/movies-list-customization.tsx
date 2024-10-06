@@ -4,7 +4,6 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { useLayout } from "@/hooks/use-layout";
 import Filter from "@/components/filter";
-import { toast } from "sonner";
 
 export const MoviesListCustomization: React.FC = () => {
   const { layout, toggleLayout } = useLayout();
@@ -19,12 +18,12 @@ export const MoviesListCustomization: React.FC = () => {
           {
             value: "20",
             label: "20",
-            callBack: (value) => toast.info(`Showing ${value} titles`),
+            // callBack: (value) => toast.info(`Showing ${value} titles`),
           },
           {
             value: "40",
             label: "40",
-            callBack: (value) => toast.info(`Showing ${value} titles`),
+            // callBack: (value) => toast.info(`Showing ${value} titles`),
           },
           { value: "all", label: <InfinityIcon className='w-4 h-4' /> },
         ]}
