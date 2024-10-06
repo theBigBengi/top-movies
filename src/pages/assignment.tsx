@@ -25,10 +25,10 @@ export const AssignmentPage: React.FC = () => {
           <ArrowRightIcon className='ml-1 h-4 w-4' />
         </Link>
         <PageHeaderHeading className='hidden md:block'>
-          Why Popcrown ?
+          About Popcrown
         </PageHeaderHeading>
         <PageHeaderHeading className='md:hidden'>
-          Why Popcrown is born ?
+          About Popcrown
         </PageHeaderHeading>
 
         <PageHeaderDescription>
@@ -50,22 +50,12 @@ export const AssignmentPage: React.FC = () => {
           <section className='mb-8'>
             <h2 className='text-2xl font-semibold mb-4'>General Guidelines</h2>
             <ul className='list-disc pl-5 space-y-2'>
-              <li>
-                Feel free to use any open-source 3rd party libraries you like.
-              </li>
-              <li>
-                This page must be implemented using <strong>React.js</strong>{" "}
-                and TypeScript.
-              </li>
               <li>Pay attention to performance and smoothness of the page.</li>
               <li>
                 Use correct code architecture, the code should be clean and
                 readable.
               </li>
-              <li>
-                You should be able to explain the division into components and
-                other design decisions.
-              </li>
+
               <li>User experience (UX) is up to you.</li>
             </ul>
           </section>
@@ -74,8 +64,8 @@ export const AssignmentPage: React.FC = () => {
           <section className='mb-8'>
             <h2 className='text-2xl font-semibold mb-4'>Submission</h2>
             <p className='text-lg'>
-              You can zip and mail the project or upload it to GitHub and
-              provide the repository link.
+              Zip and mail the project or upload it to GitHub and provide the
+              repository link.
             </p>
           </section>
         </CardContent>
@@ -96,34 +86,6 @@ export const AssignmentPage: React.FC = () => {
             <li>
               Each item in the list should include the movie’s picture, title,
               and release date.
-            </li>
-            <li>
-              Use the <strong>TMDB API</strong> to retrieve movie data.{" "}
-              <a
-                href='https://developers.themoviedb.org/3/getting-started/introduction'
-                target='_blank'
-                className='text-blue-500 underline'
-              >
-                API Documentation
-              </a>
-              .
-            </li>
-            <li>
-              The link to retrieve the top movies list:{" "}
-              <a
-                href='https://api.themoviedb.org/3/movie/popular?api_key=4170bf35f7a61b8012d65de6ad644b9b&page=1'
-                target='_blank'
-                className='text-blue-500 underline'
-              >
-                Popular Movies API
-              </a>
-              .
-            </li>
-            <li>
-              Use the following URL format for movie images:{" "}
-              <span className='block mt-2 italic'>
-                https://image.tmdb.org/t/p/w500/[poster_path]
-              </span>
             </li>
           </ol>
         </CardContent>
@@ -148,11 +110,11 @@ export const AssignmentPage: React.FC = () => {
             </li>
             <li>
               <strong>MovieList:</strong> Fetches and displays the list of top
-              20 movies using the TMDB API.
+              20 movies using API.
             </li>
             <li>
               <strong>API Service:</strong> Encapsulates the logic for fetching
-              movie data from the TMDB API.
+              movie data from API.
             </li>
           </ul>
         </CardContent>
