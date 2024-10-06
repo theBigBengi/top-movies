@@ -57,7 +57,7 @@ export const Rating: React.FC<RatingProps> = ({
             <h2 className='mx-auto font-bold text-xl'>{movie.title}</h2>
           </div>
           <div className='w-16 h-16 rounded-full bg-black flex items-center justify-center dark:text-black dark:bg-white text-white text-4xl font-extrabold'>
-            {rating}
+            {rating === 0 ? "?" : rating}
           </div>
           <div className='flex gap-1'>
             {Array.from({ length: totalStars }, (_, index) => {
